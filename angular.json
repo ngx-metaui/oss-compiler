@@ -1,11 +1,11 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "",
   "projects": {
     "oss-compiler": {
-      "root": "",
-      "sourceRoot": "src",
+      "root": "apps/oss-compiler",
+      "sourceRoot": "apps/oss-compiler/src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {
@@ -17,18 +17,16 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/oss-compiler",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "outputPath": "dist/apps/oss-compiler",
+            "index": "apps/oss-compiler/src/index.html",
+            "main": "apps/oss-compiler/src/main.ts",
+            "polyfills": "apps/oss-compiler/src/polyfills.ts",
+            "tsConfig": "apps/oss-compiler/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/oss-compiler/src/favicon.ico",
+              "apps/oss-compiler/src/assets"
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["apps/oss-compiler/src/styles.scss"],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -36,8 +34,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/oss-compiler/src/environments/environment.ts",
+                  "with": "apps/oss-compiler/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -79,17 +77,15 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "src/styles.scss"
-            ],
+            "main": "apps/oss-compiler/src/test.ts",
+            "polyfills": "apps/oss-compiler/src/polyfills.ts",
+            "tsConfig": "apps/oss-compiler/tsconfig.spec.json",
+            "karmaConfig": "apps/oss-compiler/karma.conf.js",
+            "styles": ["apps/oss-compiler/src/styles.scss"],
             "scripts": [],
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/oss-compiler/src/favicon.ico",
+              "apps/oss-compiler/src/assets"
             ]
           }
         },
@@ -97,25 +93,23 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
+              "apps/oss-compiler/tsconfig.app.json",
+              "apps/oss-compiler/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
     },
     "oss-compiler-e2e": {
-      "root": "e2e/",
+      "root": "apps/oss-compiler-e2e",
       "projectType": "application",
       "prefix": "",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
+            "protractorConfig": "apps/oss-compiler-e2e/protractor.conf.js",
             "devServerTarget": "oss-compiler:serve"
           },
           "configurations": {
@@ -127,14 +121,42 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": "apps/oss-compiler-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
+    },
+    "compiler": {
+      "root": "libs/compiler",
+      "sourceRoot": "libs/compiler/src",
+      "projectType": "library",
+      "prefix": "oss-compiler",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/compiler/tsconfig.lib.json",
+              "libs/compiler/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/compiler/src/test.ts",
+            "tsConfig": "libs/compiler/tsconfig.spec.json",
+            "karmaConfig": "libs/compiler/karma.conf.js"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
-  "defaultProject": "oss-compiler"
+  "defaultProject": "compiler",
+  "cli": {
+    "defaultCollection": "@nrwl/schematics"
+  }
 }

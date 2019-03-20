@@ -1,0 +1,21 @@
+{
+  "npmScope": "oss-compiler",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "oss-compiler": {
+      "tags": []
+    },
+    "oss-compiler-e2e": {
+      "tags": []
+    },
+    "compiler": {
+      "tags": []
+    }
+  }
+}
